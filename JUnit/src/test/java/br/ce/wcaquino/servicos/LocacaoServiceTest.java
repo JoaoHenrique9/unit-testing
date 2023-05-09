@@ -10,6 +10,7 @@ import static org.junit.Assert.fail;
 import java.util.Date;
 
 import org.hamcrest.MatcherAssert;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ErrorCollector;
@@ -23,17 +24,24 @@ import br.ce.wcaquino.exceptions.LocadoraException;
 
 public class LocacaoServiceTest {
 
+	LocacaoService service;
+
 	@Rule
 	public ErrorCollector error = new ErrorCollector();
 
 	@Rule
 	public ExpectedException exception = ExpectedException.none();
 
+	@Before
+	public void setup() {
+		service = new LocacaoService();
+	}
+
 	@Test
 	public void testeLocacao() throws Exception {
 
 		// Cenario
-		LocacaoService service = new LocacaoService();
+		service = new LocacaoService();
 		Usuario usuario = new Usuario("Usuario 1");
 		Filme filme = new Filme("Filme 1", 2, 5.0);
 
@@ -52,7 +60,7 @@ public class LocacaoServiceTest {
 	public void testeLocacao_filmeSemEstoque() throws Exception {
 
 		// Cenario
-		LocacaoService service = new LocacaoService();
+		service = new LocacaoService();
 		Usuario usuario = new Usuario("Usuario 1");
 		Filme filme = new Filme("Filme 1", 0, 5.0);
 
@@ -63,7 +71,7 @@ public class LocacaoServiceTest {
 	@Test
 	public void testeLocacao_usuarioVazio() throws FilmeSemEstoqueException {
 		// Cenario
-		LocacaoService service = new LocacaoService();
+		service = new LocacaoService();
 		Filme filme = new Filme("Filme 1", 2, 5.0);
 
 		// Acao
@@ -79,7 +87,7 @@ public class LocacaoServiceTest {
 	@Test
 	public void testeLocacao_filmeVazio() throws LocadoraException, FilmeSemEstoqueException {
 		// Cenario
-		LocacaoService service = new LocacaoService();
+		service = new LocacaoService();
 		Usuario usuario = new Usuario("Usuario 1");
 
 		exception.expect(LocadoraException.class);
