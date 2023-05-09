@@ -15,8 +15,6 @@ import br.ce.wcaquino.exceptions.LocadoraException;
 public class LocacaoService {
 	public Locacao alugarFilme(Usuario usuario, List<Filme> filmes) throws FilmeSemEstoqueException, LocadoraException {
 
-		Double valorTotal = 0D;
-
 		if (usuario == null) {
 			throw new LocadoraException("Usuario vazio");
 		}
@@ -24,15 +22,35 @@ public class LocacaoService {
 			throw new LocadoraException("Filme vazio");
 		}
 		for (Filme filme : filmes) {
-			if (filme.getEstoque() == 0) {
+			if (filme.getEstoque() == 0)
 				throw new FilmeSemEstoqueException();
-			}
-			valorTotal += filme.getPrecoLocacao();
 		}
 		Locacao locacao = new Locacao();
 		locacao.setFilmes(filmes);
 		locacao.setUsuario(usuario);
 		locacao.setDataLocacao(new Date());
+
+		Double valorTotal = 0D;
+		for (int i = 0; i < filmes.size(); i++) {
+			Filme filme = filmes.get(i);
+			Double valorFilme = filme.getPrecoLocacao();
+			switch (i) {
+				case 2:
+					valorFilme = valorFilme * 0.75;
+					break;
+				case 3:
+					valorFilme = valorFilme * 0.5;
+					break;
+				case 4:
+					valorFilme = valorFilme * 0.25;
+					break;
+				case 5:
+					valorFilme = 0D;
+					break;
+			}
+			valorTotal += valorFilme;
+
+		}
 		locacao.setValor(valorTotal);
 
 		// Entrega no dia seguinte

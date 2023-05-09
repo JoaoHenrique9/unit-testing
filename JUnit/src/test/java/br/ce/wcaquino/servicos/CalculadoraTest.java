@@ -67,4 +67,17 @@ public class CalculadoraTest {
         // Verificacao
         assertEquals(2, resultado);
     }
+
+    @Test
+    public void deveMultiplicarDoisValores() {
+        // Cenario
+        int a = 5;
+        int b = 5;
+
+        // Acao
+        int resultado = calc.multiplicar(a, b);
+
+        // Verificacao
+        assertEquals(25, resultado);
+    }
 }
