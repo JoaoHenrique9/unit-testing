@@ -2,7 +2,6 @@ package br.ce.wcaquino.servicos;
 
 import static br.ce.wcaquino.utils.DataUtils.adicionarDias;
 
-import java.rmi.registry.Registry;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
