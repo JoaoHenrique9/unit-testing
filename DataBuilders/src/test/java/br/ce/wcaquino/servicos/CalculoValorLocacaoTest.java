@@ -21,6 +21,7 @@ import br.ce.wcaquino.entidades.Locacao;
 import br.ce.wcaquino.entidades.Usuario;
 import br.ce.wcaquino.exceptions.FilmeSemEstoqueException;
 import br.ce.wcaquino.exceptions.LocadoraException;
+import buildermaster.BuilderMaster;
 
 @RunWith(Parameterized.class)
 public class CalculoValorLocacaoTest {
@@ -74,8 +75,7 @@ public class CalculoValorLocacaoTest {
         assertThat(resultado.getValor(), is(valorLocacao));
     }
 
-    // @Test
-    // public void print() {
-    // System.out.println(valorLocacao);
-    // }
+    public static void main(String[] args) {
+        new BuilderMaster().gerarCodigoClasse(Locacao.class);
+    }
 }
