@@ -7,7 +7,6 @@ import static br.ce.wcaquino.matchers.MatchersProprios.caiEm;
 import static br.ce.wcaquino.matchers.MatchersProprios.caiNumaSegunda;
 import static br.ce.wcaquino.matchers.MatchersProprios.ehHoje;
 import static br.ce.wcaquino.matchers.MatchersProprios.ehHojeComDiferencaDias;
-import static br.ce.wcaquino.utils.DataUtils.obterDataComDiferencaDias;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -33,7 +32,10 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ErrorCollector;
 import org.junit.rules.ExpectedException;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 
 import br.ce.wcaquino.builders.FilmeBuilder;
 import br.ce.wcaquino.dao.LocacaoDAO;
@@ -46,12 +48,16 @@ import br.ce.wcaquino.utils.DataUtils;
 
 public class LocacaoServiceTest {
 
+	@InjectMocks
 	private LocacaoService service;
 
+	@Mock
 	private SPCService spc;
 
+	@Mock
 	private LocacaoDAO dao;
 
+	@Mock
 	private EmailService email;
 
 	@Rule
@@ -62,13 +68,7 @@ public class LocacaoServiceTest {
 
 	@Before
 	public void setup() {
-		service = new LocacaoService();
-		dao = Mockito.mock(LocacaoDAO.class);
-		service.setLocacaoDAO(dao);
-		spc = Mockito.mock(SPCService.class);
-		service.setSPCService(spc);
-		email = Mockito.mock(EmailService.class);
-		service.setEmailService(email);
+		MockitoAnnotations.openMocks(this);
 	}
 
 	@Test
